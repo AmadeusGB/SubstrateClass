@@ -1,48 +1,60 @@
-struct Round {
-    pi: f32,
-    r:  f32,
+use std::ops::Mul;
+struct Round<T> {
+    pi: T,
+    r:  T,
 }
-struct Triangle {
-    b: u32,
-    h: u32,
+struct Triangle<T> {
+    b: T,
+    h: T,
 }
-struct Rectangle {
-    w: u32,
-    h: u32,
+struct Rectangle<T> {
+    w: T,
+    h: T,
 }
 
-trait TypeInfo {
+trait HasArea<T: Mul<Output = T> + Copy> {
+    fn calc_area(&self) -> T;
     fn type_of(&self) -> &str;
-    fn calc_area(&self);
 }
 
-impl TypeInfo for Round {
+impl<T: Mul<Output = T> + Copy> HasArea<T> for Round<T> {
+    fn calc_area(&self) -> T {
+        self.pi * self.r * self.r
+    }
     fn type_of(&self) -> &str {
         "Round"
     }
-    fn calc_area(&self) {
-        println!("{:?}",self.pi * self.r * self.r);
+}
+impl<T: Mul<Output = T> + Copy> HasArea<T> for Triangle<T> {
+    fn calc_area(&self) -> T {
+        self.b * self.h
+    }
+    fn type_of(&self) -> &str {
+        "Triangle"
+    }
+}
+impl<T: Mul<Output = T> + Copy> HasArea<T> for Rectangle<T> {
+    fn calc_area(&self) -> T {
+        self.w * self.h
+    }
+    fn type_of(&self) -> &str {
+        "Rectangle"
     }
 }
 
-fn calculate_area<T: TypeInfo + Debug>(task: T) {
-    match task.type_of() {
-        "Round" => task.calc_area(),
-        _ => println!("This type don't implement"),
-    }
-
+fn calculate_area<T: Mul<Output = T> + HasArea<T> + Copy>(shape: T) {
+    shape.calc_area();
 }
 
 fn main() {
     let example1 = Round { pi:3.14, r:10.0};
-    let example2 = Triangle { b:2, h:1};
+    let example2 = Triangle { b:2.0, h:1.0};
     let example3 = Rectangle { w:2, h:5};
 
-    //println!("{:?}",example1.type_of());
     calculate_area(example1);
-
-
-    //println!("Round calculate Result is {:?}", calculate_area(example1));
-    //println!("Triangle calculate Result is {:?}", calculate_area(example2.b, example2.h));
-    //println!("Rectangle calculate Result is {:?}", calculate_area(example3.w, example3.h));
+/*
+    println!("{:?}",example1.calc_area());
+    println!("{:?}",example2.calc_area() * 0.5);
+    println!("{:?}",example3.calc_area());*/
+    //calculate_area(example1);
 }
