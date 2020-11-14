@@ -34,7 +34,7 @@ fn main() {
     let example2 = Triangle { b:2.0, h:1.0};
     let example3 = Rectangle { w:2, h:5};
 
-    println!("{:?}",example1.calc_area());
-    println!("{:?}",example2.calc_area() * 0.5);
-    println!("{:?}",example3.calc_area());
+    println!("Round area is {:?}",example1.calc_area());
+    println!("Triangle area is {:?}",example2.calc_area() * 0.5);
+    println!("Rectangle area is {:?}",example3.calc_area());
 }
