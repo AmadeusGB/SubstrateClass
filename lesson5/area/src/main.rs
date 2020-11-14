@@ -30,7 +30,7 @@ impl<T: Mul<Output = T> + Copy> Rectangle<T> {
 
 
 fn main() {
-    let example1 = Round { pi:3, r:10};
+    let example1 = Round { pi:3.14, r:10.0};
     let example2 = Triangle { b:2.0, h:1.0};
     let example3 = Rectangle { w:2, h:5};
 
