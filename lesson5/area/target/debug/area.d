@@ -1,1 +1,1 @@
-/home/project/SubstrateClass/lesson5/tmp/target/debug/area: /home/project/SubstrateClass/lesson5/tmp/src/main.rs
+/home/project/SubstrateClass/lesson5/area/target/debug/area: /home/project/SubstrateClass/lesson5/area/src/main.rs
