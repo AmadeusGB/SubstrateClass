@@ -5,6 +5,13 @@ pub trait HasArea {
 struct Square<T> {
     side: T,
 }
+struct Circle<T> {
+    radius: T,
+}
+struct Triangle<T> {
+    base: T,
+    hight: T,
+}
 impl<T: std::ops::Mul<Output = T> + Copy> HasArea for Square<T> {
     type Output = T;
     
@@ -12,19 +19,12 @@ impl<T: std::ops::Mul<Output = T> + Copy> HasArea for Square<T> {
         self.side * self.side
     }
 }
-struct Circle<T> {
-    radius: T,
-}
 impl<T: std::ops::Mul<Output = T> + Into<f64> + Copy> HasArea for Circle<T> {
     type Output = f64;
     
     fn get_area(&self) -> Self::Output {
         (self.radius * self.radius).into() * std::f64::consts::PI
     }
-}
-struct Triangle<T> {
-    base: T,
-    hight: T,
 }
 impl<T: std::ops::Mul<Output = T> + Into<f64> + Copy> HasArea for Triangle<T> {
     type Output = f64;
