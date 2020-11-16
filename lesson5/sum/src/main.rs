@@ -2,8 +2,11 @@ fn sum_integer_sets(t: &[u32]) -> Option<u32> {
     if t.len() > 0 {
         let mut total:u32 = 0;
         for item in t.iter() {
-            total.checked_add(*item);
-            total += item;
+            match total.checked_add(*item) {
+                Some(s) => total = s,
+                None => return None,
+            }
+            
         }
         Some(total)
     }
